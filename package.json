@@ -1,0 +1,11 @@
+{
+    "name": "MyWebSite",
+    "description": "My website",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "latest",
+		 "ejs": "latest",
+		 "nodemon": "^1.11.0"
+		
+    }
+}
