@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>EOC-COP</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+
+    <!-- Template styles -->
+    <style rel="stylesheet">
+        /* TEMPLATE STYLES */
+        
+        html,
+        body,
+        .view {
+            height: 100%;
+        }
+        /* Navigation*/
+        
+        .navbar {
+            background-color: transparent;
+        }
+        
+        .scrolling-navbar {
+            -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            transition: background .5s ease-in-out, padding .5s ease-in-out;
+        }
+        
+        .top-nav-collapse {
+            background-color: #1C2331;
+        }
+        
+        footer.page-footer {
+            background-color: #1C2331;
+            margin-top: -1px;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                background-color: #1C2331;
+            }
+        }
+        .navbar .btn-group .dropdown-menu a:hover {
+            color: #000 !important;
+        }
+        .navbar .btn-group .dropdown-menu a:active {
+            color: #fff !important;
+        }
+        /*Call to action*/
+        
+        .flex-center {
+            color: #fff;
+        }
+        
+        .view {
+            background: url("")no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+
+<body>
+
+        <header>
+                
+                 <p class="h5 text-center mb-4" ><center><h3 style="color:black">Emergency Operations Centre - Common Operating Picture </h3></center></p>
+             </header>
+
+
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark elegant-color-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="nearestlocations.html">Search Near By Places <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="route.html">Route</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="LatLon.html">Track location -Lat and Long</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="address.html">Track Location - Address</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="prototype.html">Prototype</a>
+                </li>
+            </ul>
+          
+        </div>
+    </div>
+</nav>
+<!--/.Navbar-->
+
+<div class="">
+
+    <h4>Information about Incident</h4>
+    
+    <Label>Disaster/Incident Type</label>  
+    
+    <select>
+      <option value="">Pick Incident type</option>
+      <option value="fire">Fire Disaster</option>
+      <option value="natural">Natural Disaster</option>
+      <option value="terror">Man-Made Disasters</option>
+      <option value="Environmental">Environmental Hazards</option>
+    </select> <br>
+    <div id="floating-panel">
+        <table>
+            <tr>Enter Location Details</tr>
+            <tr>
+                <td> Latitude:&nbsp;</td>
+            <td><input id="lat" type="textbox"></td></tr>
+              <tr><td>Longitude:&nbsp;</td><td> <input id="long" type="textbox"></td></tr> 
+             <tr> <td> Address:&nbsp;</td><td><input id="address" type="textbox"></td> </tr>
+             <tr><td></td><td><input id="submit" type="button" value="Search"></td></tr>
+             <tr> <td></td><td><p><a href="entities.html" class="btn btn-primary btn-lg" rel="nofollow" >Next</a></p></td>></tr>
+            </table>
+            </div>
+
+
+</div>
+
+
+
+
+
+
+
+    <!--Mask-->
+    <!-- <div class="view hm-black-light">
+        <div class="full-bg-img flex-center">
+            <ul class="animated fadeInUp"> -->
+                <!-- <li>
+                    <h1 class="h1-responsive font-bold">EOC-COP</h1></li>
+                <li>
+                    <p style="color:black">Emergency Operations Centre - Common Operating Picture</p>
+                </li> -->
+                <!-- <li>
+                
+
+                    
+                       
+ 
+  <p> -->
+     <!--<input class="btn btn-primary btn-lg" type="submit" value="Login">-->
+  <!-- <a href="nearestlocations.html" class="btn btn-primary btn-lg" rel="nofollow" >Search Near By Places</a>
+  
+  
+  </p>
+  <br>
+  <p><a href="route.html" class="btn btn-primary btn-lg" rel="nofollow" >Route</a></p>
+  <br>
+  <p><a href="LatLon.html" class="btn btn-primary btn-lg" rel="nofollow" >Track location -Lat and Long</a></p>
+  <br>
+  <p><a href="address.html" class="btn btn-primary btn-lg" rel="nofollow" >Track Location - Address</a></p> -->
+
+
+<!-- </form>
+                </li>
+            </ul>
+        </div>
+    </div> -->
+    <!--/.Mask-->
+
+    <!--Footer-->
+    <!-- <footer class="page-footer center-on-small-only">
+
+        <!--Footer links-->
+        
+        <!--/.Footer links-->
+
+        <!-- <hr> -->
+
+        <!--Call to action-->
+       
+        <!--/.Call to action-->
+
+        <!--Copyright-->
+        <!-- <div class="footer-copyright">
+            <div class="container-fluid">
+                © 2017 Copyright: <a href="https://www.MDBootstrap.com">  </a>
+
+            </div>
+        </div> -->
+        <!--/.Copyright-->
+
+    <!-- </footer> -->
+    <!--/.Footer-->
+
+
+    <!-- SCRIPTS -->
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+
+    <!-- Bootstrap dropdown -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+<script>
+//    function validateForm() {
+//         var x = document.forms["myForm"]["username"].value;
+//         if (x == "") {
+//             alert("Username must be filled out");
+//             return false;
+//         }
+//    }
+    
+
+
+    
+</script>
+</body>
+
+</html>
