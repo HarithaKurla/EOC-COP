@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Geocoding service</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+        <!-- Material Design Bootstrap -->
+        <link href="css/mdb.min.css" rel="stylesheet">
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      /* html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      } */
+      #floating-panel {
+        position: absolute;
+    
+        left: 25%;
+        z-index: 5;
+       
+        padding: 5px;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      html,
+        body,
+        .view {
+            
+            height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+        }
+        /* Navigation*/
+        
+        .navbar {
+            background-color: transparent;
+        }
+        
+        .scrolling-navbar {
+            -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            transition: background .5s ease-in-out, padding .5s ease-in-out;
+        }
+        
+        .top-nav-collapse {
+            background-color: #1C2331;
+        }
+        
+        footer.page-footer {
+            background-color: #1C2331;
+            margin-top: -1px;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                background-color: #1C2331;
+            }
+        }
+        .navbar .btn-group .dropdown-menu a:hover {
+            color: #000 !important;
+        }
+        .navbar .btn-group .dropdown-menu a:active {
+            color: #fff !important;
+        }
+        /*Call to action*/
+        
+        .flex-center {
+            color: #fff;
+        }
+        
+        .view {
+            background: url("")no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+  </head>
+  <body onload="initialize()">
+
+
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark elegant-color-dark fixed-top">
+      <div class="container">
+          <a class="navbar-brand" href="#"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="nearestlocations">Search Near By Places </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="route">Route</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="LatLon">Track location -Lat and Long</a>
+                  </li>
+                
+                  <li class="nav-item">
+                        <a class="nav-link" href="prototype">Prototype</a>
+                    </li>
+                  
+              </ul>
+            
+          </div>
+      </div>
+  </nav>
+  <!--/.Navbar-->
+  <div>
+        <br>
+        <br>
+      <br>
+      <br>
+      
+  </div>
+
+  <div align="center"> <input type="radio" name="search" id="LatR" value="SLatLong" onchange="setForm()" checked> Search by Latitude & Longitude
+  <input  id="AddressR" type="radio" name="search" value="Saddress" onchange="setForm()"> Search by Address<br><br></div>
+ 
+  <div id="addressForm" align="center">
+  <form>
+  <table>
+  <tr>
+    <td>Enter Street Address : </td>
+	<td><input id="address" type="textbox" value=""></td></tr>
+	<tr>
+    <td>Enter City: </td>
+	<td><input id="city" type="textbox" value=""></td></tr>
+	<tr>
+    <td>Enter State : </td>
+	<td><input id="state" type="textbox" value=""></td></tr>
+	<tr>
+    <td>Enter Zipcode : </td>
+	<td><input id="zipcode" type="textbox" value=""></td></tr>
+	<tr>
+	<td></td>
+	<td>
+    <input type="button" value="Search" onclick="addressMap()"></td>
+	</tr>
+</table>
+  </form>
+    </div>
+	<div id="latlonForm" align="center">
+  <form>
+  <table>
+  <tr>
+    <td>Enter Latitude : </td>
+	<td><input id="lat" type="textbox" value=""></td></tr>
+	<tr>
+    <td>Enter Longitude : </td>
+	<td><input id="long" type="textbox" value=""></td></tr>
+	<tr>
+	<td></td>
+	<td>
+    <input id="submit" type="button" value="Search" onclick="initMap()"></td>
+	</tr>
+</table>
+  </form>
+    </div>
+  <div id="map"   style="width: 600px; height: 480px;left:350px;top:40px;"></div>
+  <script>
+   var geocoder;
+  var map;
+  function setForm()
+  {
+	if(document.getElementById('LatR').checked==true)
+	{
+	document.getElementById('latlonForm').style.display="block";
+	document.getElementById('addressForm').style.display="none";
+	}
+	else{
+	document.getElementById('latlonForm').style.display="none";
+	document.getElementById('addressForm').style.display="block";
+	}
+  
+  }
+  
+  function initialize()
+  {
+ var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var mapOptions = {
+      zoom: 8,
+     center:latlng
+    }
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+   document.getElementById('addressForm').style.display="none";
+  }
+   function addressMap() {
+    geocoder = new google.maps.Geocoder();
+    //var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var mapOptions = {
+      zoom: 8,
+     
+    }
+   // map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	 codeAddress(geocoder, mapOptions);
+	 document.getElementById('map').style.display="block";
+	// document.getElementById('addressForm').style.display="none";
+  }
+ 
+
+  function codeAddress() {
+    var address = document.getElementById('address').value+","+document.getElementById('city').value+","+document.getElementById('state').value+","+document.getElementById('zipcode').value;
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason Address: ' + status);
+      }
+    });
+  }
+  
+  function initMap() {
+	  var latitude=document.getElementById('lat');
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 7,
+          center: {lat: document.getElementById('lat').value, lng:document.getElementById('long').value}
+        });
+        var geocoder = new google.maps.Geocoder();
+
+       // document.getElementById('submit').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+		  
+		  document.getElementById('map').style.display="block";
+		  document.getElementById('lat').value="";
+		  document.getElementById('long').value="";
+       // });
+      }
+
+      function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('lat').value+","+document.getElementById('long').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            //alert('Geocode was not successful for the following reasonLatLong: ' + status);
+          }
+        });
+      }
+  
+  </script>
+   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxccBB0TmDrsakSYSgz3Yx6ZG5WjC9BPY&callback=initMap">
+    </script>
+ 
+  
+  </body>
+</html>
