@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place searches</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+        <!-- Material Design Bootstrap -->
+        <link href="css/mdb.min.css" rel="stylesheet">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+        
+     
+        .view {
+            height: 100%;
+        }
+        /* Navigation*/
+        
+        .navbar {
+            background-color: transparent;
+        }
+        
+        .scrolling-navbar {
+            -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            transition: background .5s ease-in-out, padding .5s ease-in-out;
+        }
+        
+        .top-nav-collapse {
+            background-color: #1C2331;
+        }
+        
+        footer.page-footer {
+            background-color: #1C2331;
+            margin-top: -1px;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                background-color: #1C2331;
+            }
+        }
+        .navbar .btn-group .dropdown-menu a:hover {
+            color: #000 !important;
+        }
+        .navbar .btn-group .dropdown-menu a:active {
+            color: #fff !important;
+        }
+        /*Call to action*/
+        
+        .flex-center {
+            color: #fff;
+        }
+        
+        .view {
+            background: url("")no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+    <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var map;
+      var infowindow;
+//17.390728, 78.472101    lat: -33.867, lng: 151.195   40.3494338,-94.8888194
+      function initMap() {
+        var pyrmont = {lat: 40.327328, lng: -94.876415};
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: pyrmont,
+          zoom: 15
+        });
+
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: pyrmont,
+          radius: 500,
+          type: ['hospital']
+        }, callback);
+      }
+
+      function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark elegant-color-dark fixed-top">
+      <div class="container">
+          <a class="navbar-brand" href="#"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                      <a class="nav-link" href="nearestlocations">Search Near By Places</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="route">Route</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="LatLon">Track location -Lat and Long</a>
+                  </li>
+                
+                  <li class="nav-item">
+                        <a class="nav-link" href="prototype">Prototype</a>
+                    </li>
+                  
+              </ul>
+            
+          </div>
+      </div>
+  </nav>
+  <!--/.Navbar-->
+
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIOUejCtMCBgrAx7KBYsnyA-sTawDOd5I&libraries=places&callback=initMap" async defer></script>
+  </body>
+</html>

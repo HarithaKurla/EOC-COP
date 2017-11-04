@@ -168,11 +168,11 @@
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === 'OK') {
             resultsMap.setCenter(results[0].geometry.location);
-            var iconBase = 'C:/Users/S528802/Desktop/EOC-COP/fire2.png';
+            var iconBase = 'C:/Users/S528802/Desktop/EOC-COP/assets/img/fire2.png';
             var marker = new google.maps.Marker({
               map: resultsMap,
-              position: results[0].geometry.location
-             // icon: iconBase + 'parking_lot_maps.png'
+              position: results[0].geometry.location,
+             icon: iconBase 
             });
           } else {
             alert('Geocode was not successful for the following reason: ' + status);

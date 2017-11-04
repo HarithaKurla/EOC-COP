@@ -1,4 +1,5 @@
 
+    
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Material Design Bootstrap</title>
+    <title>EOC-COP</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -67,7 +68,7 @@
         }
         
         .view {
-            background: url("2.jpg")no-repeat center center fixed;
+            background: url("")no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -79,80 +80,60 @@
 
 <body>
 
+        <header>
+               
+                <p class="h5 text-center mb-4" ><center><h3 style="color:black">Emergency Operations Centre - Common Operating Picture </h3></center></p>
+            </header>
    
     <!--Mask-->
     <div class="view hm-black-light">
         <div class="full-bg-img flex-center">
-            <ul class="animated fadeInUp">
-                <li>
-                    <h1 class="h1-responsive font-bold">EOC-COP</h1></li>
-                <li>
-                    <p>Emergency Operations Centre - Common Operating Picture</p>
-                </li>
-                <li>
-                    <div class="form">
-                        
-                       
-                        
-                        <div class="tab-content">
-                          <div id="signup">   
-                            <h1>Sign Up</h1>
+        
+                        <form name="myForm" onclick="showmsg()" action="login">
+                               
+                                <!-- <p class="h5 text-center mb-4" ><center><h1 style="color:black">Register Here!!</h1></center></p> -->
+                                <br>
+                                <p class="h5 text-center mb-4" ><center><h6 style="color:red">Note: '*' fields are mandatory</h1></center></p>
+                                <br>
+                                <p id="msg"></p>
+                                    <div class="md-form">
+                                        <i class="fa fa-envelope prefix grey-text">*</i>
+                                        <input type="email" id="orangeForm-email" placeholder="Enter email id" class="form-control" name="emailid" pattern= "\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"  onblur="validateUsername()" required="true">
+                                       <p id="msg"></p>
+                                    </div>
+
+                                <div class="md-form">
+                                    <i class="fa fa-user prefix grey-text">*</i>
+                                    <input type="text" placeholder="Enter Firstname" id="orangeForm-name" class="form-control" required="true">
+                                  
+                                </div>
+                                <div class="md-form">
+                                        <i class="fa fa-user prefix grey-text">*</i>
+                                        <input type="text" placeholder="Enter Lastname" id="orangeForm-name" class="form-control" required="true">
+                                        
+                                    </div>
+                                                           
+                                <div class="md-form">
+                                    <i class="fa fa-lock prefix grey-text">*</i>
+                                    <input type="password" placeholder="Enter Password" id="orangeForm-pass" class="form-control" name="password" pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}" required="true">
+                                   
+                                </div>
                             
-                            <form action="/" method="post">
-                            
-                            <div class="top-row">
-                              <div class="field-wrap">
-                                <label>
-                                  First Name<span class="req">*</span>
-                                </label>
-                                <input type="text" required autocomplete="off" />
-                              </div>
-                          
-                              <div class="field-wrap">
-                                <label>
-                                  Last Name<span class="req">*</span>
-                                </label>
-                                <input type="text"required autocomplete="off"/>
-                              </div>
-                            </div>
-                  
-                            <div class="field-wrap">
-                              <label>
-                                Email Address<span class="req">*</span>
-                              </label>
-                              <input type="email"required autocomplete="off"/>
-                            </div>
-                            
-                            <div class="field-wrap">
-                              <label>
-                                Set A Password<span class="req">*</span>
-                              </label>
-                              <input type="password"required autocomplete="off"/>
-                            </div>
-                            
-                            <button type="submit" class="button button-block"/>Login</button>
+                                <div class="text-center">
+                                    <input type="submit" class="btn btn-deep-orange" value="Sign Up" >
+                                    <!-- <button class="btn btn-deep-orange">Sign up</button> -->
+                                </div>
+                                
                             
                             </form>
-                  
-                          </div>
-                          
-                          
-                            
-                            
-                            
-                           <!--Mask <button class="button button-block"/>Log In</button>-->
-                            
-                            </form>
+                        
+                        
                   
                           </div>
                           
                         </div><!-- tab-content -->
                         
-                  </div> <!-- /form -->
-                </li>
-            </ul>
-        </div>
-    </div>
+                
     <!--/.Mask-->
 
     <!--Footer-->
@@ -195,7 +176,58 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
 
+    <script>
+        //    function validateForm() {
+        //         var x = document.forms["myForm"]["username"].value;
+        //         if (x == "") {
+        //             alert("Username must be filled out");
+        //             return false;
+        //         }
+        //    }
 
+        function showmsg()
+        {
+            document.getElementById("msg").innerHTML.show()="Thanks for registering!";
+        }
+            function validatePassword() {
+                var rege2 = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20}/;
+                // var rege = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
+                var y = document.forms["myForm"]["password"].value;
+                if (rege2.test(y)) {
+                    // alert("Password was valid");
+                    return true;
+                }
+                else
+                {
+                    alert("Password must be filled correctly");
+                    return false;
+        
+                }
+            }
+        
+            function validateUsername() {
+                var rege = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+                // var rege = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
+                var x = document.forms["myForm"]["emailid"].value;
+                if (rege.test(x)) {
+                    // alert("Password was valid");
+                    return true;
+                }
+                else
+                {
+                        document.getElementById("msg").innerHTML.show()="Please enter correct email id";
+                    alert("Check your username format");
+                    return false;
+        
+                }
+            }
+        
+            
+        
+        
+            
+        </script>
+        
 </body>
 
 </html>

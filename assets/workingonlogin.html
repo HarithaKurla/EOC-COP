@@ -1,0 +1,331 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+    <title>Google Maps</title>
+
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAi_x03rBPvcUzObU_OU5Z_RRMrZ4ZiepwBPC13G1CO0mIcOaHJBSF-jlBQxmGDKmcezkCQdycMczfaQ" type="text/javascript"></script>
+
+    <script src="map.js" type="text/javascript"></script>
+
+    <style type="text/css">
+<!--
+/* body {
+	font: 14px "Trebuchet MS", Verdana, sans-serif;
+	background: #FFFFCC;
+} */
+.style1 {font-size: 18px}
+
+html,
+        body,
+        .view {
+            height: 100%;
+            font: 14px;
+	background: #FFFFCC;
+        }
+        /* Navigation*/
+        
+        .navbar {
+            background-color: transparent;
+        }
+        
+        .scrolling-navbar {
+            -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            transition: background .5s ease-in-out, padding .5s ease-in-out;
+        }
+        
+        .top-nav-collapse {
+            background-color: #1C2331;
+        }
+        
+        footer.page-footer {
+            background-color: #1C2331;
+            margin-top: -1px;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                background-color: #1C2331;
+            }
+        }
+        .navbar .btn-group .dropdown-menu a:hover {
+            color: #000 !important;
+        }
+        .navbar .btn-group .dropdown-menu a:active {
+            color: #fff !important;
+        }
+        /*Call to action*/
+        
+        .flex-center {
+            color: #fff;
+        }
+        
+        .view {
+            background: url("")no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+
+
+    </style>
+</head>
+
+<!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark elegant-color-dark fixed-top">
+      <div class="container">
+          <a class="navbar-brand" href="#"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="nearestlocations.html">Search Near By Places </a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="route.html">Route</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="LatLon.html">Track location -Lat and Long</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="address.html">Track Location - Address</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="prototype.html">Prototype</a>
+                </li>
+                  
+              </ul>
+            
+          </div>
+      </div>
+  </nav>
+  <!--/.Navbar-->
+
+
+  <body onunload="GUnload()">
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+<div align="center">
+
+    
+
+    <div id="controls">
+<div class="flex-center">
+     <form onsubmit="start();return false">
+
+      
+
+      <input align="center" type="text" size="80" maxlength="200" id="startpoint" placeholder="Enter Rescue Team location" /><br />
+
+      <input type="text" size="80" maxlength="200" id="endpoint" placeholder="Enter Incident location" /><br /><br>
+
+<!-- <input type="text" size="80" maxlength="200" id="startpoint" value="51.942638,-7.858014" /><br>
+
+      <input type="text" size="80" maxlength="200" id="endpoint" value="52.009586,-7.912860" /><br> -->
+
+      <input type="submit" value="Start" />
+      <br>
+      <br>
+     </form>
+    </div>
+    </div>
+
+
+
+    <div id="map" style="width: 800px; height: 400px"></div>
+
+    <div class="style1" id="step">&nbsp;</div>
+
+    <div class="style1" id="distance">Miles: 0.00</div>
+
+
+
+    <span class="style1">
+    <script type="text/javascript">
+
+    //<![CDATA[
+
+    if (GBrowserIsCompatible()) {
+
+ 
+
+      var map = new GMap2(document.getElementById("map"));
+
+      map.addControl(new GMapTypeControl());
+
+      map.setCenter(new GLatLng(0,0),2);
+
+      var dirn = new GDirections();
+
+      var step = 10; // metres
+
+      var tick = 50; // milliseconds
+
+      var poly;
+
+      var eol;
+
+      var car = new GIcon();
+
+          car.image="http://www.iconsdb.com/icons/preview/red/car-4-xxl.png"
+
+          car.iconSize=new GSize(32,18);
+
+          car.iconAnchor=new GPoint(16,9);
+
+      var marker;
+
+      var k=0;
+
+      var stepnum=0;
+
+      var speed = "";   
+
+
+
+      function animate(d) {
+
+        if (d>eol) {
+
+          document.getElementById("step").innerHTML = "<b>Trip completed</b>";
+
+          document.getElementById("distance").innerHTML =  "Miles: "+(d/1609.344).toFixed(2);
+
+          return;
+
+        }
+
+        var p = poly.GetPointAtDistance(d);
+
+        if (k++>=180/step) {
+
+          map.panTo(p);
+
+          k=0;
+
+        }
+
+        marker.setPoint(p);
+
+        document.getElementById("distance").innerHTML =  "Miles: "+(d/1609.344).toFixed(2)+speed;
+
+        if (stepnum+1 < dirn.getRoute(0).getNumSteps()) {
+
+          if (dirn.getRoute(0).getStep(stepnum).getPolylineIndex() < poly.GetIndexAtDistance(d)) {
+
+            stepnum++;
+
+            var steptext = dirn.getRoute(0).getStep(stepnum).getDescriptionHtml();
+
+            document.getElementById("step").innerHTML = "<b>Next:</b> "+steptext;
+
+            var stepdist = dirn.getRoute(0).getStep(stepnum-1).getDistance().meters;
+
+            var steptime = dirn.getRoute(0).getStep(stepnum-1).getDuration().seconds;
+
+            var stepspeed = ((stepdist/steptime) * 2.24).toFixed(0);
+
+            step = stepspeed/2.5;
+
+            speed = "<br>Current speed: " + stepspeed +" mph";
+
+          }
+
+        } else {
+
+          if (dirn.getRoute(0).getStep(stepnum).getPolylineIndex() < poly.GetIndexAtDistance(d)) {
+
+            document.getElementById("step").innerHTML = "<b>Next: Arrive at your destination</b>";
+
+          }
+
+        }
+
+        setTimeout("animate("+(d+step)+")", tick);
+
+      }
+
+
+
+      GEvent.addListener(dirn,"load", function() {
+
+        document.getElementById("controls").style.display="none";
+
+        poly=dirn.getPolyline();
+
+        eol=poly.Distance();
+
+        map.setCenter(poly.getVertex(0),17);
+
+        map.addOverlay(new GMarker(poly.getVertex(0),G_START_ICON));
+
+        map.addOverlay(new GMarker(poly.getVertex(poly.getVertexCount()-1),G_END_ICON));
+
+        marker = new GMarker(poly.getVertex(0),{icon:car});
+
+        map.addOverlay(marker);
+
+        var steptext = dirn.getRoute(0).getStep(stepnum).getDescriptionHtml();
+
+        document.getElementById("step").innerHTML = steptext;
+
+        setTimeout("animate(0)",2000);  // Allow time for the initial map display
+
+      });
+
+
+
+      GEvent.addListener(dirn,"error", function() {
+
+        alert("Location(s) not recognised. Code: "+dirn.getStatus().code);
+
+      });
+
+
+
+      function start() {
+
+        var startpoint = document.getElementById("startpoint").value;
+
+        var endpoint = document.getElementById("endpoint").value;
+
+        dirn.loadFromWaypoints([startpoint,endpoint],{getPolyline:true,getSteps:true});
+
+      }
+
+
+
+    }
+
+    //]]>
+
+    </script>
+    </span></div>
+
+  </body>
+
+
+
+</html>

@@ -20,9 +20,44 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/assets/'));
 
 
-app.use("/",function (request, response) {
+app.get("/",function (request, response) {
   response.render("index.ejs");
 });
+
+app.get("/login",function (request, response) {
+  response.render("login.ejs");
+});
+app.get("/signup",function (request, response) {
+  response.render("signup.ejs");
+});
+app.get("/address",function (request, response) {
+  response.render("address.ejs");
+});
+
+app.get("/entities",function (request, response) {
+  response.render("entities.ejs");
+});
+app.get("/forgotpassword",function (request, response) {
+  response.render("forgotpassword.ejs");
+});
+
+app.get("/HomeDisplay",function (request, response) {
+  response.render("HomeDisplay.ejs");
+});
+app.get("/LatLon",function (request, response) {
+  response.render("LatLon.ejs");
+});
+app.get("/nearestlocations",function (request, response) {
+  response.render("nearestlocations.ejs");
+});
+
+app.get("/prototype",function (request, response) {
+  response.render("prototype.ejs");
+});
+app.get("/route",function (request, response) {
+  response.render("route.ejs");
+});
+
 
 
 
