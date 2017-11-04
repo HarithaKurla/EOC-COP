@@ -143,26 +143,26 @@
   <table>
   <tr>
     <td>Enter Street Address : </td>
-	<td><input id="address" type="textbox" value=""></td></tr>
+	<td><input id="address" type="text" name="State" required=""></td></tr>
 	<tr>
     <td>Enter City: </td>
-	<td><input id="city" type="textbox" value=""></td></tr>
+	<td><input id="city" type="text" name="city" pattern="[A-Za-z]{1,9}" required=""></td></tr>
 	<tr>
     <td>Enter State : </td>
-	<td><input id="state" type="textbox" value=""></td></tr>
+	<td><input id="state" type="text" name="state" pattern="[A-Za-z]{1,9}" required=""></td></tr>
 	<tr>
     <td>Enter Zipcode : </td>
-	<td><input id="zipcode" type="textbox" value=""></td></tr>
+	<td><input id="zipcode" type="text" name="zip" pattern="[0-9]{1,5}" required=""></td></tr>
 	<tr>
 	<td></td>
 	<td>
-    <input type="button" value="Search" onclick="addressMap()"></td>
+        <button  class="btn btn-primary btn-md" onclick="addressMap()">Search</button></td>
 	</tr>
 </table>
   </form>
     </div>
 	<div id="latlonForm" align="center">
-  <form name="myForm" >
+  <form name="myForm">
   <table>
   <tr>
     <td>Enter Latitude : </td>
@@ -173,12 +173,14 @@
 	<tr>
 	<td></td>
 	<td>
-    <input type="submit" value="Search" ></td>
+    <button  class="btn btn-primary btn-md" onclick="initMap()">Search</button>
+    <!--<button  class="btn btn-primary btn-md" onclick="clear()">Clear</button>-->
+</td>
 	</tr>
 </table>
   </form>
     </div>
-  <div id="map"   style="width: 600px; height: 480px;left:350px;top:40px;"></div>
+  <div id="map" style="width: 600px; height: 480px;left:350px;top:40px;"></div>
   <script>
    var geocoder;
   var map;
@@ -205,6 +207,8 @@
     }
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
    document.getElementById('addressForm').style.display="none";
+
+   
   }
    function addressMap() {
     geocoder = new google.maps.Geocoder();
@@ -251,6 +255,11 @@
 		  document.getElementById('long').value="";
        // });
       }
+
+    //   function clear(){
+    //     document.getElementById('lat').value="";
+	// 	document.getElementById('long').value="";
+    //   }
 
       function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('lat').value+","+document.getElementById('long').value;
