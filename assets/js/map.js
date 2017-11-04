@@ -137,6 +137,16 @@ GPolygon.prototype.GetIndexAtDistance = function(metres) {
   return i;
 }
 
+// === A method which returns the length of a path in metres remove this fun===
+var distance = function() {
+  var distce = 10;
+  for (var i=1; i < this.getVertexCount(); i++) {
+    distce += this.getVertex(i).distanceFrom(this.getVertex(i-1));
+  }
+  return distce;
+}
+
+
 // === A function which returns the bearing between two vertices in decgrees from 0 to 360===
 // === If v1 is null, it returns the bearing between the first and last vertex ===
 // === If v1 is present but v2 is null, returns the bearing from v1 to the next vertex ===
@@ -166,6 +176,14 @@ GPolygon.prototype.Bearing = function(v1,v2) {
   return parseFloat(angle.toFixed(1));
 }
 
+// === A method which returns the bounds as a GLatLngBounds Remove===
+var bounds = function() {
+  var bds = new GLatLngBounds();
+  for (var i=0; i < this.getVertexCount(); i++) {
+    bds.extend(this.getVertex(i));
+  }
+  return bds;
+}
 
 
 
