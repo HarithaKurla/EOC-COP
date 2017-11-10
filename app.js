@@ -25,6 +25,8 @@ app.get("/",function (request, response) {
 });
 
 app.get("/login",function (request, response) {
+	//req.flash('success_msg', 'you are registered');
+	request.flash('success_msg', 'you are registered');
   response.render("login.ejs");
 });
 app.get("/signup",function (request, response) {
@@ -37,8 +39,8 @@ app.get("/address",function (request, response) {
 app.get("/entities",function (request, response) {
   response.render("entities.ejs");
 });
-app.get("/forgetpassword",function (request, response) {
-  response.render("forgetpassword.ejs");
+app.get("/forgotpassword",function (request, response) {
+  response.render("forgotpassword.ejs");
 });
 
 app.get("/HomeDisplay",function (request, response) {
@@ -70,7 +72,7 @@ app.use(function (request, response) {
 //var server = http.createServer(app);
 
  //Listen for an application http request on port 8081 
- app.set('port',3006 );
+ app.set('port',3005 );
 app.listen(app.set('port'), function () {
   console.log('Listening on http://127.0.0.1:' + app.get('port'));
 });
