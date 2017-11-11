@@ -143,7 +143,23 @@
       
   <table>
       <tr align ="center"><td colspan="2"><b><h4>Enter the following details</h4></b></td></tr>
-  //
+  <tr>
+    <td>Street Address*: </td>
+	<td><input id="address" type="text" name="address" placeholder="Enter Address" pattern="/^\d+\w*\s*(?:[\-\/]?\s*)?\d*\s*\d+\/?\s*\d*\s*/" required=""></td></tr>
+	<tr>
+    <td>City*: </td>
+	<td><input id="city" type="text" name="city" placeholder="Enter city" pattern="[A-Za-z]{1,9}" required=""></td></tr>
+	<tr>
+    <td>State*: </td>
+	<td><input id="state" type="text" name="state" placeholder="Enter state" pattern="[A-Za-z]{1,9}" required=""></td></tr>
+	<tr>
+    <td>Zipcode*: </td>
+    <td><input id="zipcode" type="text" name="zip" placeholder="Enter Zipcode" pattern="[0-9]{1,5}" required="">
+        </td>
+        <td>&nbsp; - &nbsp;</td>
+       <td><input id="zipcode1" type="text" name="zip1" placeholder="(optional)" pattern="[0-9]{1,4}" required="">
+        </td>
+</tr>
 	<tr>
 	<td></td>
 	<td>
