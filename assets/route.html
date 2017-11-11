@@ -311,7 +311,40 @@ function initMap() {
 
 
 
-      GEvent.addListener(dirn,"load", function() {
+      /*GEvent.addListener(dirn,"load", function() {
+
+        document.getElementById("controls").style.display="none";
+
+        poly=dirn.getPolyline();
+
+        eol=poly.Distance();
+
+        map.setCenter(poly.getVertex(0),17);
+
+        map.addOverlay(new GMarker(poly.getVertex(0),G_START_ICON));
+
+        map.addOverlay(new GMarker(poly.getVertex(poly.getVertexCount()-1),G_END_ICON));
+
+        marker = new GMarker(poly.getVertex(0),{icon:car});
+
+        map.addOverlay(marker);
+
+        var steptext = dirn.getRoute(0).getStep(stepnum).getDescriptionHtml();
+
+        document.getElementById("step").innerHTML = steptext;
+
+        setTimeout("animate(0)",2000);  // Allow time for the initial map display
+
+      });*/
+
+
+
+      GEvent.addListener(dirn,"error", function() {
+
+        alert("Location(s) not recognised. Code: "+dirn.getStatus().code);
+
+      });
+	  GEvent.addListener(dirn,"load", function() {
 
         document.getElementById("controls").style.display="none";
 
@@ -336,15 +369,6 @@ function initMap() {
         setTimeout("animate(0)",2000);  // Allow time for the initial map display
 
       });
-
-
-
-      GEvent.addListener(dirn,"error", function() {
-
-        alert("Location(s) not recognised. Code: "+dirn.getStatus().code);
-
-      });
-
 
 
       function start() {
