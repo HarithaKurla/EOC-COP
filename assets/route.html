@@ -171,7 +171,9 @@ html,
 
  
 
-      var map = new GMap2(document.getElementById("map"));
+      //var map = new GMap2(document.getElementById("map"));
+      var map;
+      var infowindow;
 
       map.addControl(new GMapTypeControl());
 
@@ -189,7 +191,7 @@ html,
 
       var car = new GIcon();
 
-          car.image="http://www.iconsdb.com/icons/preview/red/car-4-xxl.png"
+          car.image="http://www.ipharmd.net/images/ambulance_plain_red.png"
 
           car.iconSize=new GSize(32,18);
 
@@ -203,7 +205,47 @@ html,
 
       var speed = "";   
 
+//--------------------------------------------------
 
+function initMap() {
+        var pyrmont = {lat: 40.327328, lng: -94.876415};
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: pyrmont,
+          zoom: 15
+        });
+
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: pyrmont,
+          radius: 1000,
+          type: ['hospital']
+        }, callback);
+      }
+
+      function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+
+//--------------------------------------------------
 
       function animate(d) {
 
@@ -314,43 +356,11 @@ html,
         dirn.loadFromWaypoints([startpoint,endpoint],{getPolyline:true,getSteps:true});
 
       }
-
-
-
     }
-    /*
-    GEvent.addListener(dirn,"load", function() {
-
-        document.getElementById("controls").style.display="none";
-
-        poly=dirn.getPolyline();
-
-        eol=poly.Distance();
-
-        map.setCenter(poly.getVertex(0),17);
-
-        map.addOverlay(new GMarker(poly.getVertex(0),G_START_ICON));
-
-        map.addOverlay(new GMarker(poly.getVertex(poly.getVertexCount()-1),G_END_ICON));
-
-        marker = new GMarker(poly.getVertex(0),{icon:car});
-
-        map.addOverlay(marker);
-
-        var steptext = dirn.getRoute(0).getStep(stepnum).getDescriptionHtml();
-
-        document.getElementById("step").innerHTML = steptext;
-
-        setTimeout("animate(0)",2000);  // Allow time for the initial map display
-
-      });
-      */
-
-    //]]>
 
     </script>
     </span></div>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIOUejCtMCBgrAx7KBYsnyA-sTawDOd5I&libraries=places&callback=initMap" async defer></script>
   </body>
 
 

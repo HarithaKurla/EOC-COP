@@ -201,7 +201,50 @@ html,
 
       var speed = "";   
 
+//----------------------------
 
+var map;
+      var infowindow;
+//17.390728, 78.472101    lat: -33.867, lng: 151.195   40.3494338,-94.8888194
+      function initMap() {
+        var pyrmont = {lat: 40.327328, lng: -94.876415};
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: pyrmont,
+          zoom: 15
+        });
+
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: pyrmont,
+          radius: 500,
+          type: ['hospital']
+        }, callback);
+      }
+
+      function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+
+//----------------------------
 
       function animate(d) {
 
@@ -306,6 +349,7 @@ html,
       function start() {
 
         var startpoint = document.getElementById("startpoint").value;
+      // var startpoint = results
 
         var endpoint = document.getElementById("endpoint").value;
 
@@ -320,6 +364,7 @@ html,
     //]]>
 
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIOUejCtMCBgrAx7KBYsnyA-sTawDOd5I&libraries=places&callback=initMap" async defer></script>
     </span></div>
 
   </body>
