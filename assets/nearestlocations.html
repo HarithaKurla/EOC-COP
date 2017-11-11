@@ -82,7 +82,7 @@
 
       var map;
       var infowindow;
-//17.390728, 78.472101    lat: -33.867, lng: 151.195   40.3494338,-94.8888194
+
       function initMap() {
         var pyrmont = {lat: 40.327328, lng: -94.876415};
 
@@ -95,7 +95,7 @@
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
           location: pyrmont,
-          radius: 500,
+          radius: 1000,
           type: ['hospital']
         }, callback);
       }
