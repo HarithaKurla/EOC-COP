@@ -74,6 +74,14 @@
             -o-background-size: cover;
             background-size: cover;
         }
+
+		function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
     </style>
     <script>
       // This example requires the Places library. Include the libraries=places
@@ -100,13 +108,15 @@
         }, callback);
       }
 
-      function callback(results, status) {
+      /*function callback(results, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
             createMarker(results[i]);
           }
         }
-      }
+      }*/
+
+
 
       function createMarker(place) {
         var placeLoc = place.geometry.location;
