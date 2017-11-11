@@ -25,6 +25,8 @@ app.get("/",function (request, response) {
 });
 
 app.get("/login",function (request, response) {
+	//req.flash('success_msg', 'you are registered');
+	request.flash('success_msg', 'you are registered');
   response.render("login.ejs");
 });
 app.get("/signup",function (request, response) {
