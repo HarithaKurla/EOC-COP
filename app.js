@@ -39,7 +39,7 @@ app.get("/address",function (request, response) {
 app.get("/entities",function (request, response) {
   response.render("entities.ejs");
 });
-app.get("/forgotpassword",function (request, response) {
+app.get("/forgetpassword",function (request, response) {
   response.render("forgotpassword.ejs");
 });
 
