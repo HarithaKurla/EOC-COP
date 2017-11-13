@@ -40,7 +40,7 @@ app.get("/entities",function (request, response) {
   response.render("entities.ejs");
 });
 app.get("/forgetpassword",function (request, response) {
-  response.render("forgotpassword.ejs");
+  response.render("forgetpassword.ejs");
 });
 
 app.get("/HomeDisplay",function (request, response) {
@@ -62,28 +62,11 @@ app.get("/route",function (request, response) {
 
 // 5 handle an http POST request to the new-entry URI 
 app.post("/forgetpassword", function (request, response) {
-	
- //var api_key = 'key-8bb98c339325eae4f48499cb5220a309';
-//var domain = 'sandboxfc5e6b22a8aa4fca8f52b390d96e691e.mailgun.org';
-//var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
-// console.log("haiiiii"+request.query.email);
- //console.log("Byeeeeeeeeee"+request.body.email);
-//var data = {
- // from: 'Haritha Kurla <postmaster@sandboxfc5e6b22a8aa4fca8f52b390d96e691e.mailgun.org>',
- // to: 's528766@mail.nwmissouri.edu',
- // subject: "Password Details to login",
- // text: "Your new password is: abcdef"
-  
-//};
- 
-//mailgun.messages().send(data, function (error, body) {
-  //console.log(body);
-//});
-//response.send("mail sent to the user");
+	console.log(request.query.email);
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const msg = {
-  to: 'dhulipalla.vinuth@gmail.com',
+  to: 's528744@nwmissouri.edu',
   from: 'noreply@example.com',
   subject: 'Password Recovery mail',
   text: 'Hai your new password is abc123'
@@ -100,9 +83,6 @@ app.use(function (request, response) {
   response.status(404).render("404.ejs");
 });
 
-
-// create server by injecting our express app
-//var server = http.createServer(app);
 
  //Listen for an application http request on port 8081 
  app.set('port',3005 );
