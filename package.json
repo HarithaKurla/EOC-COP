@@ -1,12 +1,12 @@
 {
-    "name": "MyWebSite",
-    "description": "My website",
-    "version": "0.0.1",
-	"main":"app.js",
-    "dependencies": {
-        "express": "latest",
-		 "ejs": "latest",
-		 "nodemon": "^1.11.0"
-		
-    }
+  "name": "MyWebSite",
+  "description": "My website",
+  "version": "0.0.1",
+  "main": "app.js",
+  "dependencies": {
+    "@sendgrid/mail": "^6.1.4",
+    "ejs": "latest",
+    "express": "latest",
+    "nodemon": "^1.11.0"
+  }
 }
