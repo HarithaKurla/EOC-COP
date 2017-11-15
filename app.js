@@ -4,21 +4,25 @@ const express = require("express");
 
 const path = require("path");
 const logger = require("morgan");
-const bodyParser = require("body-parser");
+var bodyParser = require("body-parser");
+var flash = require('connect-flash');
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/eoccop",{useMongoClient:true});
 
-
+var signupmodel = require("./models/signup.model.js");
 // =========================================================
 
 // create express app 
 global.app = express();
-
+app.use(bodyParser.urlencoded({extended:false})); 
 
 // set the root view folder & specify the view engine 
 app.set("views", path.join(__dirname, "views"));
 //app.engine('ejs', engines.ejs);
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + '/assets/'));
-
+// Connect Flash
+app.use(flash());
 
 app.get("/",function (request, response) {
   response.render("index.ejs");
@@ -32,6 +36,37 @@ app.get("/login",function (request, response) {
 app.get("/signup",function (request, response) {
   response.render("signup.ejs");
 });
+
+//Handling signup data 
+
+app.post("/signup/add",function(req,res){
+console.log(req.body);
+console.log("I am ready to add user");
+let addUser = new signupmodel();
+
+addUser.emailid = req.body.emailid;
+addUser.firstname = req.body.firstname;
+addUser.lastname = req.body.lastname;
+addUser.password = req.body.password;
+addUser.confirmpassword = req.body.cnfpassword;
+console.log(addUser);
+addUser.save(function(err,result){
+  if(!err)
+  {
+      //req.flash('success_msg', 'You are registered and can now login');
+      res.redirect("/login");
+      console.log("Inserting into Db worked");
+  }
+  else
+  {
+      console.log(err);
+
+  }
+
+});
+
+});
+
 app.get("/address",function (request, response) {
   response.render("address.ejs");
 });
