@@ -97,17 +97,18 @@ app.get("/route",function (request, response) {
 
 // 5 handle an http POST request to the new-entry URI 
 app.post("/forgetpassword", function (request, response) {
-	console.log(request.query.email);
+	//console.log(request.body);
+	//console.log(request.query);
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const msg = {
-  to: 's528744@nwmissouri.edu',
+  to: request.body.email,
   from: 'noreply@example.com',
   subject: 'Password Recovery mail',
   text: 'Hai your new password is abc123'
 };
 sgMail.send(msg);
-response.send("sample.ejs","email has been sent");
+//response.send("sample.ejs","email has been sent");
 response.render("forgetpassword.ejs");
 });
 
