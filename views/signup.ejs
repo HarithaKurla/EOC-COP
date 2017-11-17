@@ -90,7 +90,7 @@
         <div class="full-bg-img flex-center">
             
         
-                        <form name="myForm" onclick="showmsg()" action="login">
+                        <form name="myForm" action="/signup/add" method="post">
                                
                                 <!-- <p class="h5 text-center mb-4" ><center><h1 style="color:black">Register Here!!</h1></center></p> -->
                                 <br>
@@ -105,24 +105,24 @@
 
                                 <div class="md-form">
                                     <i class="fa fa-user prefix grey-text">*</i>
-                                    <input type="text" placeholder="Enter Firstname" id="orangeForm-name" class="form-control" required="true">
+                                    <input type="text" placeholder="Enter Firstname" id="orangeForm-name" name="firstname" class="form-control" required="true">
                                   
                                 </div>
                                 <div class="md-form">
                                         <i class="fa fa-user prefix grey-text">*</i>
-                                        <input type="text" placeholder="Enter Lastname" id="orangeForm-name" class="form-control" required="true">
+                                        <input type="text" placeholder="Enter Lastname" id="orangeForm-name" name="lastname" class="form-control" required="true">
                                         
                                     </div>
                                                            
                                 <div class="md-form">
                                     <i class="fa fa-lock prefix grey-text">*</i>
-                                    <input type="password" placeholder="Enter Password" id="orangeForm-pass" class="form-control" name="password" pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}" required="true">
+                                    <input type="password" placeholder="Enter Password" id="orangeForm-pass" name= "password" class="form-control"  pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}" required="true">
                                    
                                 </div>
                                 
                                 <div class="md-form">
                                     <i class="fa fa-lock prefix grey-text">*</i>
-                                    <input type="password" placeholder="Enter Confirm Password" id="orangeForm-pass" class="form-control" name="password" required="true">
+                                    <input type="password" placeholder="Enter Confirm Password" id="orangeForm-pass" name= "cnfpassword" class="form-control"  required="true">
                                    
                                 </div>
 
