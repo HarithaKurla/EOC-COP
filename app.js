@@ -66,13 +66,14 @@ app.post("/forgetpassword", function (request, response) {
 	//console.log(request.body);
 	//console.log(request.query);
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey('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');
 const msg = {
   to: request.body.email,
   from: 'noreply@example.com',
   subject: 'Password Recovery mail',
   text: 'Hai your new password is abc123'
 };
+console.log("mail has been sent to"+request.body.email);
 sgMail.send(msg);
 //response.send("sample.ejs","email has been sent");
 response.render("forgetpassword.ejs");
@@ -87,7 +88,7 @@ app.use(function (request, response) {
 
 
  //Listen for an application http request on port 8081 
- app.set('port',3005 );
+ app.set('port',3006 );
 app.listen(app.set('port'), function () {
   console.log('Listening on http://127.0.0.1:' + app.get('port'));
 });
