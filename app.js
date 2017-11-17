@@ -149,7 +149,7 @@ app.post("/forgetpassword", function (request, response) {
 	//console.log(request.body);
 	//console.log(request.query);
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
+sgMail.setApiKey('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');
 const msg = {
   to: request.body.email,
   from: 'noreply@example.com',
