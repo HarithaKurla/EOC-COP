@@ -7,6 +7,7 @@ const logger = require("morgan");
 var bodyParser = require("body-parser");
 var flash = require('connect-flash');
 var mongoose = require("mongoose");
+var current;
 mongoose.connect("mongodb://localhost:27017/eoccop",{useMongoClient:true});
 
 var signupmodel = require("./models/signup.model.js");
@@ -49,7 +50,8 @@ app.post("/login/find",function(req,res){
   //console.log(req.body.emailid);
   var inputEmailid = req.body.emailid;
   
- current = inputEmailid;
+  current = inputEmailid;
+ console.log(current);
   var inputPassword = req.body.password;
   console.log(inputEmailid);
   console.log(inputPassword);
