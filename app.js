@@ -39,14 +39,15 @@ app.get("/address",function (request, response) {
 app.get("/entities",function (request, response) {
   response.render("entities.ejs");
 });
-app.get("/forgotpassword",function (request, response) {
-  response.render("forgotpassword.ejs");
+app.get("/forgetpassword",function (request, response) {
+  response.render("forgetpassword.ejs");
 });
 
 app.get("/HomeDisplay",function (request, response) {
   response.render("HomeDisplay.ejs");
 });
 app.get("/LatLon",function (request, response) {
+  
   response.render("LatLon.ejs");
 });
 app.get("/nearestlocations",function (request, response) {
@@ -105,7 +106,7 @@ app.use(function (request, response) {
 //var server = http.createServer(app);
 
  //Listen for an application http request on port 8081 
- app.set('port',3005 );
+ app.set('port',3006 );
 app.listen(app.set('port'), function () {
   console.log('Listening on http://127.0.0.1:' + app.get('port'));
 });

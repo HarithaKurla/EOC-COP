@@ -139,13 +139,13 @@
   <input  id="AddressR" type="radio" name="search" value="Saddress" onchange="setForm()"> Search by Address<br><br></div>
  
   <div id="addressForm" align="center">
-  <form name="addForm">
+  <!-- <form name="addForm"> -->
       
   <table>
       <tr align ="center"><td colspan="2"><b><h4>Enter the following details</h4></b></td></tr>
   <tr>
     <td>Street Address*: </td>
-	<td><input id="address" type="text" name="address" placeholder="Enter Address" pattern="/^\d+\w*\s*(?:[\-\/]?\s*)?\d*\s*\d+\/?\s*\d*\s*/" required=""></td></tr>
+	<td><input id="address" type="text" name="address" placeholder="Enter Address"  required=""></td></tr>
 	<tr>
     <td>City*: </td>
 	<td><input id="city" type="text" name="city" placeholder="Enter city" pattern="[A-Za-z]{1,9}" required=""></td></tr>
@@ -166,29 +166,40 @@
         <button  class="btn btn-primary btn-md" onclick="addressMap()">Search</button></td>
 	</tr>
 </table>
-  </form>
+  <!-- </form> -->
     </div>
 	<div id="latlonForm" align="center">
-  <form name="myForm">
-  <table>
-        <tr align ="center"><td colspan="2"><b><h4>Enter the following details</h4></b></td></tr>
-  <tr>
-    <td>Latitude* : </td>
-	<td><input id="lat" type="text" name="latitude" placeholder="Enter latitude" pattern="-?\d{1,3}\.\d+" required=""></td></tr>
-	<tr>
-    <td>Longitude*: </td>
-	<td><input id="long" type="text" name="longitude" placeholder="Enter longitude" pattern="-?\d{1,3}\.\d+" required=""></td></tr>
-	<tr>
-	<td></td>
-	<td>
-    <button  class="btn btn-primary btn-md" onclick="initMap()">Search</button>
-    <!--<button  class="btn btn-primary btn-md" onclick="clear()">Clear</button>-->
-</td>
-	</tr>
-</table>
-  </form>
+  <!-- <form name="myForm"> -->
+        <div id="errMsg" role="alert">
+        </div>
+    <table>
+            <tr align ="center"><td colspan="2"><b><h4>Enter the following details</h4></b></td></tr>
+    <tr>
+        <td>Latitude* : </td>
+        <td><input id="lat" type="number" name="latitude" value="40.352917" placeholder="Enter latitude" min="-90" max="90" step="any" onblur ="initMap()" required=""></td>
+    </tr>
+        
+        <tr>
+        <td>Longitude*: </td>
+        <td><input id="long" type="number" name="longitude" value="-94.882524" placeholder="Enter longitude" min="-180" max="180" step="any" onblur ="initMap()" required=""></td>
+        
+    </tr>
+        <tr>
+        <td></td>
+        <td>
+        <button   class="btn btn-primary btn-md" onclick="initMap()">Search</button>
+        <!-- <button  class="btn btn-primary btn-md" >Search</button> -->
+        <!-- <button  class="btn btn-primary btn-md" onclick="clear()">Clear</button> -->
+    </td>
+        </tr>
+    </table>
+  <!-- </form> -->
     </div>
   <div id="map" style="width: 600px; height: 480px;left:350px;top:40px;"></div>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
   <script>
    var geocoder;
   var map;
@@ -249,20 +260,42 @@
   }
   
   function initMap() {
-	  var latitude=document.getElementById('lat');
+      //var latitude=document.getElementById('lat');
+      let lat = document.getElementById('lat').value;
+      let lng = document.getElementById('long').value;
+      if(lat.length>0 && lng.length>0){
+          if(lat>-90 && lat <90){
+             if (lng>-180 && lng<180){
+        $("#errMsg").removeClass("alert alert-danger");
+        $("#errMsg").html("");
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 7,
           center: {lat: document.getElementById('lat').value, lng:document.getElementById('long').value}
         });
+
+    }
+        else{
+            $("#errMsg").addClass("alert alert-danger");
+                $("#errMsg").html(" longitude should be greater than -180 and less than 180 ");
+        }
+    }
+        else{
+            $("#errMsg").addClass("alert alert-danger");
+                $("#errMsg").html("latitude should be greater than -90 and less than 90 ");
+        }
+    
         var geocoder = new google.maps.Geocoder();
 
        // document.getElementById('submit').addEventListener('click', function() {
           geocodeAddress(geocoder, map);
 		  
 		  document.getElementById('map').style.display="block";
-		  document.getElementById('lat').value="";
-		  document.getElementById('long').value="";
-       // });
+       
+    }
+       else{
+                $("#errMsg").addClass("alert alert-danger");
+                $("#errMsg").html("Both latitude and longitude values are mandatory");
+       }
       }
 
     //   function clear(){

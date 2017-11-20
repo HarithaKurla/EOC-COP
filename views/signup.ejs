@@ -4,6 +4,7 @@
 <html lang="en">
 
 <head>
+        
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -81,64 +82,126 @@
 <body>
 
         <header>
+                <!-- <p id="msg">adgskjdhaksjhfsdk</p> -->
+            
                
                 <p class="h5 text-center mb-4" ><center><h3 style="color:black">Emergency Operations Centre - Common Operating Picture </h3></center></p>
+                
             </header>
    
     <!--Mask-->
-    <div class="view hm-black-light">
-        <div class="full-bg-img flex-center">
+    <!-- <div class="view hm-black-light"> -->
+        <!-- <div class="full-bg-img flex-center"> -->
             
-        
-                        <form name="myForm" onclick="showmsg()" action="login">
-                               
-                                <!-- <p class="h5 text-center mb-4" ><center><h1 style="color:black">Register Here!!</h1></center></p> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    </div>
+
+                    <div class="col-sm-8">
+                        <form name="myForm" action="login">
+                            
+                                <div class="col-sm-6">
+                                <p class="h5 text-center mb-4" ><center><h1 style="color:black">Register Here!!</h1></center></p>
                                 <br>
                                 <p class="h5 text-center mb-4" ><center><h6 style="color:red">Note: '*' fields are mandatory</h1></center></p>
-                                <br>
-                                <p id="msg"></p>
-                                    <div class="md-form">
+                                <br></div>
+                                
+                            <!-- <div class="row"> -->
+                                        <div class="col-sm-6">
+                                                <div class="md-form"> 
                                         <i class="fa fa-envelope prefix grey-text">*</i>
-                                        <input type="email" id="orangeForm-email" placeholder="Enter email id" class="form-control" name="emailid" pattern= "\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"  onblur="validateUsername()" required="true">
-                                       <p id="msg"></p>
-                                    </div>
+                                        <input type = "email" id="orangeForm-email" placeholder="Enter email id" class="form-control" name="emailid" onblur="validateUsername()" required="">
+                                    </div> 
+                                     <!-- </div> -->
+                                       <!-- <div class="col-sm-6"> -->
 
+                                        <p id="msg1" style="color:red"></p>
+                                       <!-- </div> -->
+                                    <!-- </div> -->
+                                    </div>
+                                       
+                                       
+
+                                    <!-- <div class="row"> -->
+                                            <div class="col-sm-6">       
                                 <div class="md-form">
                                     <i class="fa fa-user prefix grey-text">*</i>
-                                    <input type="text" placeholder="Enter Firstname" id="orangeForm-name" class="form-control" required="true">
+                                    <input type="text" placeholder="Enter Firstname" id="orangeForm-name" name="name" class="form-control" onblur= "fname()">
                                   
-                                </div>
+                                <!-- </div> -->
+                            </div>
+                                                                    <!-- <div class="col-sm-6"> -->
+                                                                    <p id="msg2" style="color:red"></p>
+                                                                   <!-- </div> -->
+                                                                <!-- </div> -->
+                                                                </div>
+                                   <!-- <div class="row"> -->
+                                            <div class="col-sm-6">                                 
+
                                 <div class="md-form">
                                         <i class="fa fa-user prefix grey-text">*</i>
-                                        <input type="text" placeholder="Enter Lastname" id="orangeForm-name" class="form-control" required="true">
+                                        <input type="text" placeholder="Enter Lastname" id="orangeForm-name" name="lastname" class="form-control" onblur="lname()">
                                         
-                                    </div>
-                                                           
-                                <div class="md-form">
-                                    <i class="fa fa-lock prefix grey-text">*</i>
-                                    <input type="password" placeholder="Enter Password" id="orangeForm-pass" class="form-control" name="password" pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}" required="true">
-                                   
+                                    <!-- </div> -->
                                 </div>
                                 
+                                                                        <!-- <div class="col-sm-6"> -->
+                                                                        <p id="msg3" style="color:red"></p>
+                                                                       <!-- </div> -->
+                                                                    </div>
+                                                                <!-- </div> -->
+
+                                   <!-- <div class="row"> -->
+                                            <div class="col-sm-6">                            
                                 <div class="md-form">
                                     <i class="fa fa-lock prefix grey-text">*</i>
-                                    <input type="password" placeholder="Enter Confirm Password" id="orangeForm-pass" class="form-control" name="password" required="true">
+                                    <input type="password" placeholder="Enter Password" id="orangeForm-pass" class="form-control" name="password" onblur="validatePassword()" required="true">
                                    
-                                </div>
+                                <!-- </div> -->
+                            </div>
+                                                                    <!-- <div class="col-sm-6"> -->
+                                                                    <p id="msg4" style="color:red"></p>
+                                                                   <!-- </div> -->
+                                                                <!-- </div> -->
+                                                                </div>
+                                
+                                  <!-- <div class="row"> -->
+                                            <div class="col-sm-6">                                  
+                                <div class="md-form">
+                                    <i class="fa fa-lock prefix grey-text">*</i>
+                                    <input type="password" placeholder="Enter Confirm Password" id="orangeForm-pass1" class="form-control" name="cpassword" onblur="confirmPassword()" required="true">
+                                   
+                                <!-- </div> -->
+                            </div>                            
+                            
+                                                                    <!-- <div class="col-sm-6"> -->
+                                                                    <p id="msg5" style="color:red"></p>
+                                                                   <!-- </div> -->
+                                                                <!-- </div> -->
+                                                                </div>
 
+                              <div class="col-sm-6">                               
                                 <div class="text-center">
                                     <input type="submit" class="btn btn-deep-orange" value="Sign Up" >
                                     <!-- <button class="btn btn-deep-orange">Sign up</button> -->
                                 </div>
-                                
+                                </div>
+                            </div>
+                            
                             
                             </form>
+                        </div>
+                        <!-- </div> -->
+                        </div>
                         
                         
-                  
-                          </div>
+                            
+                           <!-- </div> -->
                           
-                        </div><!-- tab-content -->
+                        <!-- </div> -->
+                        
+                        
                         
                 
     <!--/.Mask-->
@@ -192,49 +255,98 @@
         //         }
         //    }
 
-        function showmsg()
-        {
-            document.getElementById("msg").innerHTML.show()="Thanks for registering!";
+        // function showmsg()
+        // {
+        //     document.getElementById("msg").innerHTML="Thanks for registering!";
+        // }
+        function fname(){
+            var msg="";
+            var regn=/^[A-Za-z]+$/;
+            var n= document.forms["myForm"]["name"].value;
+           
+            if(regn.test(n)){
+                
+                msg="";
+            }
+            else{
+                msg= "Please enter first name";
+            }
+            document.getElementById("msg2").innerHTML=msg;
+
+        }
+
+        function lname(){
+            var msg="";
+            var regn=/^[A-Za-z]+$/;
+            var n= document.forms["myForm"]["lastname"].value;
+            console.log("value"+n);
+            if(regn.test(n)){
+                
+                msg="";
+            }
+            else{
+                msg= "Please enter last name";
+            }
+            document.getElementById("msg3").innerHTML=msg;
+
         }
             function validatePassword() {
+                var msg="";
                 var rege2 = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20}/;
                 // var rege = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
                 var y = document.forms["myForm"]["password"].value;
                 if (rege2.test(y)) {
-                    // alert("Password was valid");
-                    return true;
+                    
+                    msg="";
                 }
                 else
                 {
-                    alert("Password must be filled correctly");
-                    return false;
+                   
+                    msg="Please enter valid password";
         
                 }
+                document.getElementById("msg4").innerHTML=msg;
             }
         
             function validateUsername() {
+                var msg="";
                 var rege = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
                 // var rege = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
                 var x = document.forms["myForm"]["emailid"].value;
                 if (rege.test(x)) {
-                    // alert("Password was valid");
-                    return true;
+  
+                    msg = "";
+                    
                 }
                 else
                 {
-                        document.getElementById("msg").innerHTML.show()="Please enter correct email id";
-                    alert("Check your username format");
-                    return false;
+                    
+                    msg="please enter valid username";
         
                 }
+
+                 document.getElementById("msg1").innerHTML=msg;
+                // console.log("abc");
+        
             }
-        
-            
-        
-        
-            
+
+            function confirmPassword(){
+                var msg="";
+                var y = document.forms["myForm"]["password"].value;
+                var y1= document.forms["myForm"]["cpassword"].value;
+                if(y == y1){
+                    
+                    msg = "";
+                }
+                else{
+                   
+                msg="Passwords did not match";
+                }
+                document.getElementById("msg5").innerHTML=msg;
+            }
         </script>
         
 </body>
+
 
 </html>
