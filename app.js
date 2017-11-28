@@ -7,6 +7,7 @@ const logger = require("morgan");
 var bodyParser = require("body-parser");
 var flash = require('connect-flash');
 var mongoose = require("mongoose");
+const EtherealEmail = require('ethereal-email');
 var current;
 mongoose.connect("mongodb://localhost:27017/eoccop",{useMongoClient:true});
 
@@ -149,19 +150,44 @@ app.get("/route",function (request, response) {
 
 // 5 handle an http POST request to the new-entry URI 
 app.post("/forgetpassword", function (request, response) {
-	//console.log(request.body);
-	//console.log(request.query);
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
-const msg = {
-  to: request.body.email,
-  from: 'noreply@example.com',
-  subject: 'Password Recovery mail',
-  text: 'Hai your new password is abc123'
-};
-console.log("mail has been sent to"+request.body.email);
-sgMail.send(msg);
-//response.send("sample.ejs","email has been sent");
+
+const nodemailer = require('nodemailer');
+
+// Generate test SMTP service account from ethereal.email
+// Only needed if you don't have a real mail account for testing
+nodemailer.createTestAccount((err, account) => {
+
+    // create reusable transporter object using the default SMTP transport
+    const transporter = nodemailer.createTransport({
+       service: 'gmail',
+        // true for 465, false for other ports
+         auth: {
+        user: 'noreplyeoccop@gmail.com',
+        pass: 'eoccop123'
+    }
+    });
+console.log(request.body.email);
+    // setup email data with unicode symbols
+    const mailOptions = {
+        from: 'hkurla0526@gmail.com', // sender address
+        to: request.body.email, // list of receivers
+        subject: 'Password Recovery Mail', // Subject line
+        text: 'Hello world?', // plain text body
+        html: 'Hi your password is <b>Abc@1234</b>. Please login back.' // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Message sent: %s', info.messageId);
+      
+
+      
+    });
+});
+
 response.render("forgetpassword.ejs");
 });
 
@@ -174,7 +200,7 @@ app.use(function (request, response) {
 
 
  //Listen for an application http request on port 8081 
- app.set('port',3006 );
+ app.set('port',3008 );
 app.listen(app.set('port'), function () {
   console.log('Listening on http://127.0.0.1:' + app.get('port'));
 });
