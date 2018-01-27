@@ -1,0 +1,100 @@
+<html>
+
+<head>
+<title>SAmple FirebaseApp
+</title>
+<script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBrsdNDh4YfQxiPo319Vpc7tyjwTGVz2N0",
+    authDomain: "samplefirebaseapp-b03a2.firebaseapp.com",
+    databaseURL: "https://samplefirebaseapp-b03a2.firebaseio.com",
+    projectId: "samplefirebaseapp-b03a2",
+    storageBucket: "samplefirebaseapp-b03a2.appspot.com",
+    messagingSenderId: "237219902189"
+  };
+  firebase.initializeApp(config);
+</script>
+</head>
+<body>
+<table>
+<tr>
+<td>Id:
+</td>
+<td><input type="text" name="id" id="user_id"/>
+</td>
+</tr>
+<tr>
+<td>Name
+</td>
+<td><input type="text" name="user_name" id="user_name"/>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+
+<input type="button" value="save" onclick="save_user()"/>
+</td>
+</tr>
+</table>
+<h3>User's List</h3>
+
+<table id="tbl_users_list" border="1">
+<tr>
+<td>#ID</td>
+<td>Name</td>
+</tr>
+
+</table>
+<script>
+
+var tblUsers=document.getElementById('tbl_users_list');
+var databaseref=firebase.database().ref('users/');
+
+var rowindex=1;
+databaseref.once('value',function(snapshot){
+snapshot.forEach(function (childSnapshot)
+{
+var childKey = childSnapshot.key;
+var childData = childSnapshot.val();
+
+var row=tblUsers.insertRow(rowindex);
+var cellId= row.insertCell(0);
+var cellName= row.insertCell(1);
+
+cellId.appendChild(document.createTextNode(childKey));
+cellName.appendChild(document.createTextNode(childData.user_name));
+rowindex=rowindex+1;
+});
+});
+
+function reload_page()
+{
+
+window.location.reload();
+
+}
+
+function save_user()
+{
+
+var user_name=document.getElementById('user_name').value;
+var uid=firebase.database().ref().child('users').push().key;
+
+var data={
+user_id:uid,
+user_name:user_name
+};
+var updates={};
+updates['/users/'+uid]=data;
+firebase.database().ref().update(updates);
+alert("The user is created successfuly");
+reload_page();
+}
+
+
+
+</script>
+</body>
+</html>
