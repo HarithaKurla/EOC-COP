@@ -1,7 +1,12 @@
-User Credentials
+Project Name: CERT Web application
 
-test5@gmail.com
-test123#E
+Team Members: 
+Amarendar Reddy Reddygari 
+Haritha Kurla 
+Srinithya Kamareddy
+Tilak Vinuth Nag Dhulipalla
+Venkata Naga Mahesh Kumar Vankayala
 
-test4@gmail.com
-test123#E
+
+This is a EOC-COP web application where the users can enter the location details by entering latitude and longitude details or by address details and find the nearest police, hospitals and fire departments and simulate.
+
